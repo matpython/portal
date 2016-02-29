@@ -8,28 +8,44 @@ Yet another lunch web app for intranet use in your office.
 
 ### Vagrant (for PyPila students):
 
-One you have the `Vagrantfile` and `vagrant_bootstrap.sh` downloaded (preferably by git clone on your host machine) you do the following:
+Once you have the `Vagrantfile` and `vagrant_bootstrap.sh` downloaded you do the following:
 
 ```
-host $ cd /your/dev/directory
+host $ cd /your/working/directory
 host $ vagrant up
-host $ vagrant ssh
+host $ vagrant ssh  # or putty to vagrant@127.0.0.1:2222 (password: vargrant)
 vagrant $ mkvirtualenv apof
+vagrant $ git clone https://github.com/<your_username>/apof.git tmp
+vagrant $ cp tmp/.git app/.git
+vagrant $ rm -rf tmp
 vagrant $ cd app
-vagrant $ git clone <your_fork>
-vagrant $ cd apof
-vagrant $ git remote add upstream <this_repo>
+vagrant $ git reset --hard origin/master
+vagrant $ git remote add upstream https://github.com/PyPila/apof.git
+vagrant $ git pull upstream master
 vagrant $ pip install -r requirements/devel.txt
 ```
 
 Each time you get back to your project you should use
 ```
-host $ cd /your/dev/directory
-host $ vagrant ssh
+host $ cd /your/working/directory
+host $ vagrant up
+host $ vagrant ssh  # or putty to vagrant@127.0.0.1:2222 (password: vargrant)
 vagrant $ workon apof
 ```
 
 From now you can interact with your project
 ```
 vagrant $ python manage.py <command>
+```
+
+Keep this command handy as you should use it often to be on track with the code pushed by others
+```
+vagrant $ git pull upstream master
+```
+
+### Docker (advanced):
+
+```
+host $ docker build -t apof -f devel.Dockerfile .
+host $ docker run --rm --name apof_run -it -v $(pwd)/apof:/run/app -w /run/app -p 8000:8000 apof
 ```
