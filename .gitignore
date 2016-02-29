@@ -62,3 +62,5 @@ target/
 .ipynb_checkpoints
 
 .vagrant
+apof/apof/settings/local.py
+db.sqlite3
