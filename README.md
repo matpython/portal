@@ -16,7 +16,7 @@ host $ vagrant up
 host $ vagrant ssh  # or putty to vagrant@127.0.0.1:2222 (password: vargrant)
 vagrant $ mkvirtualenv apof
 vagrant $ git clone https://github.com/<your_username>/apof.git tmp
-vagrant $ cp tmp/.git app/.git
+vagrant $ cp -r tmp/.git app/.git
 vagrant $ rm -rf tmp
 vagrant $ cd app
 vagrant $ git reset --hard origin/master
